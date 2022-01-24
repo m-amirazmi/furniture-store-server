@@ -1,0 +1,28 @@
+{
+	"name": "furniture-store-server",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon src/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/m-amirazmi/furniture-store-server.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/m-amirazmi/furniture-store-server/issues"
+	},
+	"homepage": "https://github.com/m-amirazmi/furniture-store-server#readme",
+	"dependencies": {
+		"dotenv": "^14.2.0",
+		"express": "^4.17.2",
+		"mongoose": "^6.1.7"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
+}
