@@ -2,6 +2,7 @@ import { Document } from "mongoose";
 
 export interface ICategoryDoc extends Document {
 	name: string;
+	isFeatured: boolean;
 }
 
 export interface IProductDoc extends Document {

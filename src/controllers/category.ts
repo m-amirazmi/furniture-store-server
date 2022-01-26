@@ -3,11 +3,8 @@ import { Category } from "../models/category";
 import { ICategoryDoc } from "../utils/interfaces";
 
 export const createCategory = async (req: Request, res: Response) => {
-	const { name }: ICategoryDoc = req.body;
-	if (!name) return res.status(400).json({ message: "Name input should not be emptied!" });
-
 	try {
-		const category: ICategoryDoc = await Category.create({ name });
+		const category: ICategoryDoc = await Category.create(req.body);
 		return res.status(201).json(category);
 	} catch (error) {
 		return res.status(400).json({ error });
@@ -37,12 +34,13 @@ export const getCategory = async (req: Request, res: Response) => {
 
 export const updateCategory = async (req: Request, res: Response) => {
 	const { id } = req.params;
-	const { name }: ICategoryDoc = req.body;
+	const { name, isFeatured }: ICategoryDoc = req.body;
 	if (!name) return res.status(400).json({ message: "Name input should not be emptied!" });
 
 	try {
 		const category: ICategoryDoc | null = await Category.findById(id);
 		if (category) {
+			category.isFeatured = isFeatured;
 			category.name = name;
 			category.save();
 			return res.status(201).json(category);
