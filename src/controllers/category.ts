@@ -17,7 +17,7 @@ export const createCategory = async (req: Request, res: Response) => {
 export const getCategories = async (req: Request, res: Response) => {
 	try {
 		const categories: ICategoryDoc[] = await Category.find({});
-		return res.status(201).json(categories);
+		return res.status(200).json(categories);
 	} catch (error) {
 		return res.status(400).json({ error });
 	}
@@ -28,7 +28,7 @@ export const getCategory = async (req: Request, res: Response) => {
 
 	try {
 		const category: ICategoryDoc | null = await Category.findById(id);
-		if (category) res.status(201).json(category);
+		if (category) res.status(20).json(category);
 		else return res.status(400).json({ message: "The category does not exists!" });
 	} catch (error) {
 		return res.status(400).json({ error });

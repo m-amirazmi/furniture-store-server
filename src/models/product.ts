@@ -21,10 +21,6 @@ const productSchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
-		isNew: {
-			type: Boolean,
-			default: true,
-		},
 		colors: [{ name: String }],
 		category: {
 			type: Schema.Types.ObjectId,
