@@ -1,18 +1,26 @@
 import { PutObjectRequest } from "aws-sdk/clients/s3";
-import fs from "fs";
-import { s3 } from "./configs";
-import { IS3Params } from "./interfaces";
+import { UploadedFile } from "express-fileupload";
+import { BUCKET_NAME, s3 } from "./configs";
+import { IFileUpload } from "./interfaces";
 
-export const uploadImage = (imageFile: fs.PathOrFileDescriptor) => {
-	const fileContent = fs.readFileSync(imageFile);
+export const uploadFile = async ({ data }: IFileUpload) => {
+	const filetype = Object.keys(data)[0];
+	const uploadedFile = data[filetype] as UploadedFile;
+	const blob = uploadedFile.data;
+	const filename = uploadedFile.name.includes(".") ? uploadedFile.name.split(".")[0] : uploadedFile.name;
+	const ext = uploadedFile.mimetype.split("/")[1];
+
 	const params: PutObjectRequest = {
-		Bucket: process.env.AWS_BUCKET_NAME,
-		Key: "test.png",
-		Body: fileContent,
+		Bucket: `${BUCKET_NAME}/${filetype}`,
+		Key: `${filename}.${ext}`,
+		Body: blob,
+		ACL: "public-read",
 	};
 
-	s3.upload(params, (err, data) => {
-		if (err) throw err;
-		console.log(`File uploaded successfully. ${data.Location}`);
-	});
+	try {
+		const saved = await s3.upload(params).promise();
+		return saved.Location;
+	} catch (error) {
+		console.log(error);
+	}
 };

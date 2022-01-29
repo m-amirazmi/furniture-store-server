@@ -1,3 +1,5 @@
+import { Request } from "express";
+import { FileArray } from "express-fileupload";
 import { Document } from "mongoose";
 
 export interface ICategoryDoc extends Document {
@@ -27,4 +29,8 @@ export interface IS3Params {
 	CreateBucketConfiguration?: {
 		LocationConstraint: string;
 	};
+}
+
+export interface IFileUpload {
+	data: FileArray;
 }
