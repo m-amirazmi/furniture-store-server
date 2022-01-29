@@ -19,3 +19,12 @@ export interface IProductDoc extends Document {
 	vendor?: string;
 	images: [{ url: string }];
 }
+
+export interface IS3Params {
+	Bucket: string;
+	Key?: string;
+	Body?: Buffer;
+	CreateBucketConfiguration?: {
+		LocationConstraint: string;
+	};
+}

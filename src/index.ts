@@ -1,5 +1,5 @@
 import express from "express";
-import { connectDB } from "./utils/configs";
+import { connectDB, connectS3 } from "./utils/configs";
 import * as dotenv from "dotenv";
 import { categoryRouter } from "./routes/category";
 import { productRouter } from "./routes/product";
