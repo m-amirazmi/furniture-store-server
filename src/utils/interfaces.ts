@@ -1,4 +1,3 @@
-import { Request } from "express";
 import { FileArray } from "express-fileupload";
 import { Document } from "mongoose";
 
@@ -33,4 +32,14 @@ export interface IS3Params {
 
 export interface IFileUpload {
 	data: FileArray;
+	multiple: string;
+}
+
+export interface IFileDoc extends Document {
+	name: string;
+	url: string;
+	type: string;
+	size: number;
+	sizeKB: number;
+	sizeMB: number;
 }
