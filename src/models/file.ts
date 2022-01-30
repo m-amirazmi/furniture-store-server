@@ -25,6 +25,12 @@ const fileSchema = new Schema(
 		sizeMB: {
 			type: Number,
 		},
+		width: {
+			type: Number,
+		},
+		height: {
+			type: Number,
+		},
 	},
 	{ timestamps: true }
 );

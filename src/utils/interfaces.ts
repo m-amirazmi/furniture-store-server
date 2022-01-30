@@ -40,6 +40,8 @@ export interface IFileDoc extends Document {
 	url: string;
 	type: string;
 	size: number;
-	sizeKB: number;
-	sizeMB: number;
+	sizeKB?: number;
+	sizeMB?: number;
+	height?: number;
+	width?: number;
 }
