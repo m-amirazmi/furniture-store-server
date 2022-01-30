@@ -1,6 +1,6 @@
 import { PutObjectRequest } from "aws-sdk/clients/s3";
 import { UploadedFile } from "express-fileupload";
-import { BUCKET_NAME, s3 } from "./configs";
+import { BUCKET_NAME, s3, tiny } from "./configs";
 import { IFileUpload } from "./interfaces";
 
 const saveFile = async ({ filetype, blob, filename, ext }: any) => {
@@ -19,6 +19,8 @@ const saveFile = async ({ filetype, blob, filename, ext }: any) => {
 	}
 };
 
+const compressedFile = async (file: Buffer) => await tiny.fromBuffer(file).toBuffer();
+
 export const uploadFile = async ({ data, multiple }: IFileUpload) => {
 	let uploadedFile;
 	const filetype = Object.keys(data)[0];
@@ -28,11 +30,16 @@ export const uploadFile = async ({ data, multiple }: IFileUpload) => {
 
 	return await Promise.all(
 		uploadedFile.map(async (f) => {
+			let compressed;
 			const blob = f.data;
-			const filename = f.name.includes(".") ? f.name.split(".")[0] : f.name;
+			const filename = f.name.replace(/\.[^/.]+$/, "");
 			const ext = f.mimetype.split("/")[1];
-			const saved = await saveFile({ filetype, blob, filename, ext });
-			if (saved) return { name: filename, size: f.size, url: saved.Location, type: f.mimetype };
+
+			if (filetype.includes("image")) compressed = await compressedFile(blob);
+			else compressed = blob;
+
+			const saved = await saveFile({ filetype, blob: compressed, filename, ext });
+			if (saved) return { name: filename, size: compressed.byteLength, url: saved.Location, type: f.mimetype };
 		})
 	);
 };
