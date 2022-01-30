@@ -14,14 +14,13 @@ const productSchema = new Schema(
 			type: Number,
 			required: true,
 		},
-		discountRate: {
+		discount: {
 			type: Number,
 		},
 		isFeatured: {
 			type: Boolean,
 			default: false,
 		},
-		colors: [{ name: String }],
 		category: {
 			type: Schema.Types.ObjectId,
 			ref: "Category",
@@ -42,7 +41,10 @@ const productSchema = new Schema(
 		vendor: {
 			type: String,
 		},
-		images: [{ url: String }],
+		image: {
+			type: Schema.Types.ObjectId,
+			ref: "File",
+		},
 		slug: {
 			type: String,
 			unique: true,
