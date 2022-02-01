@@ -18,6 +18,10 @@ const categorySchema = new Schema(
 			type: Boolean,
 			default: false,
 		},
+		image: {
+			type: Schema.Types.ObjectId,
+			ref: "File",
+		},
 	},
 	{ timestamps: true }
 );

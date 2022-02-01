@@ -13,7 +13,7 @@ export const createCategory = async (req: Request, res: Response) => {
 
 export const getCategories = async (req: Request, res: Response) => {
 	try {
-		const categories: ICategoryDoc[] = await Category.find({});
+		const categories: ICategoryDoc[] = await Category.find({}).populate("image");
 		return res.status(200).json(categories);
 	} catch (error) {
 		return res.status(400).json({ error });
@@ -34,7 +34,7 @@ export const getCategory = async (req: Request, res: Response) => {
 
 export const updateCategory = async (req: Request, res: Response) => {
 	const { id } = req.params;
-	const { name, isFeatured }: ICategoryDoc = req.body;
+	const { name, isFeatured, image }: ICategoryDoc = req.body;
 	if (!name) return res.status(400).json({ message: "Name input should not be emptied!" });
 
 	try {
@@ -42,6 +42,7 @@ export const updateCategory = async (req: Request, res: Response) => {
 		if (category) {
 			category.isFeatured = isFeatured;
 			category.name = name;
+			category.image = image;
 			category.save();
 			return res.status(201).json(category);
 		} else {

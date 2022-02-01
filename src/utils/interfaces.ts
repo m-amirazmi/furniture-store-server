@@ -4,12 +4,13 @@ import { Document } from "mongoose";
 export interface ICategoryDoc extends Document {
 	name: string;
 	isFeatured: boolean;
+	image: string;
 }
 
 export interface IProductDoc extends Document {
 	name: string;
 	price: number;
-	discountRate?: number;
+	discount?: number;
 	isFeatured?: boolean;
 	isNew: boolean;
 	colors?: [{ name: string }];
@@ -18,7 +19,7 @@ export interface IProductDoc extends Document {
 	description?: string;
 	sku: string;
 	vendor?: string;
-	images: [{ url: string }];
+	image: string;
 }
 
 export interface IS3Params {
