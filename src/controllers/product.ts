@@ -36,8 +36,6 @@ export const updateProduct = async (req: Request, res: Response) => {
 	const { id } = req.params;
 	const { name, price, discount, isFeatured, category, quantity, description, sku, vendor, image } = req.body;
 
-	console.log(req.body);
-
 	try {
 		const product: IProductDoc | null = await Product.findById(id);
 
