@@ -50,8 +50,9 @@ export interface IFileDoc extends Document {
 }
 
 export interface IUserDoc extends Document {
+	username: string;
 	email: string;
-	password: string;
+	password?: string;
 	token?: string;
 }
 export interface IGetAuthReq extends Request {
