@@ -1,5 +1,7 @@
 import { FileArray } from "express-fileupload";
 import { Document } from "mongoose";
+import { JwtPayload } from "jsonwebtoken";
+import { Request } from "express";
 
 export interface ICategoryDoc extends Document {
 	name: string;
@@ -45,4 +47,13 @@ export interface IFileDoc extends Document {
 	sizeMB?: number;
 	height?: number;
 	width?: number;
+}
+
+export interface IUserDoc extends Document {
+	email: string;
+	password: string;
+	token?: string;
+}
+export interface IGetAuthReq extends Request {
+	user?: JwtPayload;
 }

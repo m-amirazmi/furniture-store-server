@@ -8,6 +8,7 @@ export const ID = "AKIA24ADVONQ5C66DBE7";
 export const SECRET = "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";
 export const BUCKET_NAME = "furnistore";
 export const TINIFY_KEY = "2ZT5rYzxzNCKzDbqB1cVGxd9J837Jl89";
+export const JWT_TOKEN = "aksjfbjksbjfksafajasd";
 
 // MONGODB CONNECTION
 export const connectDB = async () => {

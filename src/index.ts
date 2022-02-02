@@ -6,6 +6,7 @@ import { connectDB, PORT } from "./utils/configs";
 import { categoryRouter } from "./routes/category";
 import { productRouter } from "./routes/product";
 import { fileRouter } from "./routes/file";
+import { userRouter } from "./routes/user";
 
 dotenv.config();
 const app = express();
@@ -17,5 +18,6 @@ connectDB();
 app.use("/api/categories", categoryRouter);
 app.use("/api/products", productRouter);
 app.use("/api/files", fileRouter);
+app.use("/api/auth", userRouter);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
